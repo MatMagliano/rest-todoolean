@@ -8,9 +8,11 @@
 
 
 $(document).ready(function functionName() {
-  console.log('ciao');
-
 getCall();
+$('.add-button').click(function() {
+  var newTodo = $('.add-input').val();
+  addTodo(newTodo);
+});
 
 }); //FINE READY
 
@@ -32,10 +34,30 @@ success: function (data) {
 error: function (richiesta, stato, errori) {
 alert("E' avvenuto un errore. " + errore);
 }
-}
-);
+});
 } // FINE GET ALL
 //-------------------------------------
+
+function addTodo(addInput) {
+  $.ajax(
+{
+url: "http://157.230.17.132:3022/todos",
+method: "POST",
+data: {
+  text: addInput
+},
+success: function (data) {
+  // $('.todo-ul').html('');
+  printAll(addInput);
+
+},
+error: function (richiesta, stato, errori) {
+alert("E' avvenuto un errore. " + errore);
+}
+});
+} // FINE ADD TODO
+//-------------------------------------
+
 function printAll(array) {
   var source = $("#todo-template").html();
   var template = Handlebars.compile(source);
@@ -49,3 +71,4 @@ function printAll(array) {
   $('.todo-ul').append(html);
   };
 } // FINE PRINT ALL
+//-------------------------------------
