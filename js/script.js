@@ -16,6 +16,7 @@ getCall();
 
 
 //----------- FUNZIONI --------------
+
 function getCall() {
   $.ajax(
 {
