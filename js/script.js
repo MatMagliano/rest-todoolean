@@ -14,6 +14,7 @@ $('.add-button').click(function() {
   addTodo(newTodo);
 });
 
+
 }); //FINE READY
 
 
@@ -27,7 +28,8 @@ url: "http://157.230.17.132:3022/todos",
 method: "GET",
 success: function (data) {
   var todos = data;
-  console.log(todos);
+
+  $('.todo-ul').html('');
   printAll(todos);
 
 },
@@ -47,7 +49,7 @@ data: {
   text: addInput
 },
 success: function (data) {
-  // $('.todo-ul').html('');
+  $('.todo-ul').html('');
   printAll(addInput);
 
 },
@@ -58,6 +60,8 @@ alert("E' avvenuto un errore. " + errore);
 } // FINE ADD TODO
 //-------------------------------------
 
+
+
 function printAll(array) {
   var source = $("#todo-template").html();
   var template = Handlebars.compile(source);
@@ -65,7 +69,7 @@ function printAll(array) {
     var list = array[i];
     var context = {
       text: list.text,
-      id: list.text
+      id: list.id
   }
   var html = template(context);
   $('.todo-ul').append(html);
